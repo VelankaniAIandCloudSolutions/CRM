@@ -35,6 +35,7 @@ import RejectedQuotes from '../views/dashboard/RejectedQuotes.vue'
 
 
 
+
 const routes = [
   {
     path: '/',

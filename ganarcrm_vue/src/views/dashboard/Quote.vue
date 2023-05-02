@@ -151,7 +151,7 @@ import 'vue-toastification/dist/index.css';
           //     })
           //     .catch(error => {
           //         console.log(error)
-          //     })
+          //     }) 
 
           // await axios
           //     .get(`/api/v1/quote/?quote_id=${quoteID}`)
