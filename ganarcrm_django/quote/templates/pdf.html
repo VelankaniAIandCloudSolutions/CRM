@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quote</title>
+
+    <style>
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      
+      th {
+        background-color: #f2f2f2;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      
+      .items-row-cell {
+        padding: 8px;
+      }
+
+  
+      .top-right {
+        width: 50%;
+        font-size: 16px;
+        display: inline-block;
+        vertical-align: top;
+      }
+      
+      .top-right h2 {
+        margin-bottom: 20px;
+      }
+      
+      .top-right .split {
+        font-size: 0;
+      }
+          
+          .top {
+            font-size: 0;
+          }
+          
+          .top-left {
+            width: 50%;
+            font-size: 16px;
+            display: inline-block;
+            vertical-align: top;
+          }
+          
+          .top-left .client {
+            margin-top: 40px;
+            margin-left: 40px;
+          }
+          
+          .top-right {
+            width: 50%;
+            font-size: 16px;
+            display: inline-block;
+            vertical-align: top;
+          }
+          
+          .top-right h2 {
+            margin-bottom: 20px;
+          }
+          
+          .top-right .split {
+            font-size: 0;
+          }
+          
+          .top-right .split .split-left,
+          .top-right .split .split-right {
+            width: 25%;
+            display: inline-block;
+            vertical-align: top;
+            font-size: 16px;
+          }
+          
+          .top-right .split .split-right {
+            width: 30%;
+          }
+
+
+          button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          
+          button:hover {
+            background-color: #3e8e41;
+          }
+          .hide-button {
+            display: none;
+          }
+
+        
+      </style>
+    </head>
+
+    <body>
+      <br>
+      <br>
+        <div class="top">
+            <div class="top-left">
+             
+
+                <div class="client">
+                    <h2> NAME : {{ quote.client_name }} </h2>
+                    <h2> Quotation Number : {{quote.quotation_request_number}}
+
+                   
+                </div>
+            </div>
+
+            <div class="top-right">
+                <h2 class="subtitle">Invoice For : {{ quote.subject }}</h2>
+
+                <div class="split">
+                    <div class="split-left">Email :</div>
+                    <div class="split-right">{{ client.email }}</div>
+                </div>
+
+                <div class="split">
+                    <div class="split-left">Quotation Date :</div>
+                    <div class="split-right">{{ quote.quotation_date|date:'d.m.Y' }}</div>
+                </div>
+
+                <div class="split">
+                    <div class="split-left">Expiry Date :</div>
+                    <div class="split-right">{{ quote.expiry_date|date:'d.m.Y' }}</div>
+                </div>
+
+              
+              
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="items">
+            <div class="items-row">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Service Name</th>
+                    <th>Unit</th>
+                    <th>Rate</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>Inclusions</th>
+                    <th>Menu Items</th>
+
+                    
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {% for product in products %}
+                    <tr>
+                      <td>{{ product.service_name }}</td>
+                      <td>{{ product.unit }}</td>
+                      <td>{{ product.rate }}</td>
+                      <td>{{ product.quantity }}</td>
+                      <td>{{ product.amount }}</td>
+                      <td>{{ product.from_date }}</td>
+                      <td>{{ product.to_date }}</td>
+                      <td>
+                        <div>
+                          {% for inclusion in product.inclusions.all %}
+                            <br>
+                            {{ inclusion.inclusions }}
+                          {% endfor %}
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          {% for menu_item in product.menu_items.all %}
+                            <br>
+                            {{ menu_item.menu_items }}
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+               
+              </table>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="quotes">
+            <div class="items">
+              <div class="items-row">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>grand_total</th>
+                      <th>discount</th>
+                      <th>discount_amount</th>
+                      <th>sub_total</th>
+                      <th>Tax</th>
+                      <th>Tax Amount</th>
+                      <th>description</th>
+                      <th>terms_and_condition</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                      <td>{{ quote.grand_total }}</td>
+                      <td>{{ quote.discount }}</td>
+                      <td>{{ quote.discount_amount }}</td>
+                      <td>{{ quote.sub_total }}</td>
+                      <td>{{ quote.tax }}</td>
+                      <td>{{ quote.tax_amount }}</td>
+                      <td>{{ quote.description }}</td>
+                      <td>{{ quote.terms_and_condition }}</td>
+
+                     
+                    </tr>
+                   
+                  </tbody>
+                </table>
+                <div>
+                  {% if quote.is_accepted %}
+                    <button disabled>Quotation Accepted</button>
+                  {% else %}
+                    <form method="post" action="{% url 'accept_quotation' quote.id %}">
+                      {% csrf_token %}
+                      <button class="hide-button" type="submit">Accept Quotation</button>
+                    </form>
+                  {% endif %}
+                  </div>
+              </div>
+            </div>
+          </div> 
+          
+          
+          
+              
+          
+    </body>
+</html>
+
+
+
+
+
+
+
+{% comment %} <div style="display: flex; justify-content: center; margin-top: 20px;">
+  <form method="POST" action="http://localhost:8081/dashboard/quotes/:id/thankyouu/{{ quoteID }}">
+    <button v-if="!quote.is_accepted" @click="setAsAccepted()" class="button is-success" style="background-color: green; color: white; padding: 10px; border: none; border-radius: 5px; margin-right: 10px;">Accept Quotation</button>
+  </form>
+  <form method="POST" action="https://example.com/reject-quotation">
+    <button type="submit" style="background-color: red; color: white; padding: 10px; border: none; border-radius: 5px;">Reject Quotation</button>
+  </form>
+</div>
+<script>
+  async setAsAccepted() {
+    this.$store.commit('setIsLoading', true);
+  
+    const quoteID = this.$route.params.id;
+  
+    this.quote.is_accepted = true;
+  
+  
+    try {
+      const response = await axios.patch(`/api/v1/quotes/${quoteID}/accept_quotation/`)
+      .then(response => {
+        toast({
+                        message: 'The Quotation  was Accepted',
+                        type: 'is-success',
+                        dismissible: true,
+                        pauseOnHover: true,
+                        duration: 2000,
+                        position: 'bottom-right',
+              })
+        console.log('Response:', response.data);
+            })
+  
+  
+  
+  
+        const updatedQuote = response.data.quote;
+  
+        if (updatedQuote && updatedQuote.is_accepted) {
+          const index = this.quotes.findIndex(q => q.id === updatedQuote.id);
+          if (index >= 0) {
+            this.quotes.splice(index, 1, updatedQuote);
+          }
+        }
+        this.$store.commit('setIsLoading', false);
+  
+  
+      }catch (error) {
+      console.error(error);
+      }
+    this.$store.commit('setIsLoading', false)
+    }
+  </script>   {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
