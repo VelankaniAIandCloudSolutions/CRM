@@ -37,7 +37,7 @@ FRONTEND_WEBSITE_CANCEL_URL = 'http://localhost:8081/dashboard/team/plans'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
@@ -123,8 +123,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'USER': BASE_DIR / 'db.sqlite3user',
+        'PASSWORD': 'AicVelankani@1234',
+        'HOST' : 'localhost',
+        'PORT':'',
     }
 }
+
 
 
 # Password validation
@@ -181,6 +186,8 @@ EMAIL_HOST_PASSWORD = 'yqitjfeerbqecmpk'
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
