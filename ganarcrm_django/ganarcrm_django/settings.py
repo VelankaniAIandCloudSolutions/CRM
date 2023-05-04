@@ -40,12 +40,12 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8080',
-    'http://localhost:8081'
+    'http://crm-vue-app-708.s3-website.ap-south-1.amazonaws.com',
+    'http://crm-vue-app-708.s3-website.ap-south-1.amazonaws.com'
 ]
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8080',
-    'http://localhost:8081',
+    'http://crm-vue-app-708.s3-website.ap-south-1.amazonaws.com',
+    'http://crm-vue-app-708.s3-website.ap-south-1.amazonaws.com',
 ]
 
 REST_FRAMEWORK = {
