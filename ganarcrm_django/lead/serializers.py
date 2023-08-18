@@ -19,14 +19,15 @@ class LeadSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'company',
+            'address',
+            'designation',
             'contact_person',
             'email',
             'phone',
             'website',
-            'confidence',
-            'estimated_value',
+           
             'status',
-            'priority',
+            
             'assigned_to',
             'created_at',
             'modified_at',

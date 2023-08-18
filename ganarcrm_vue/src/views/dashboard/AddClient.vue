@@ -38,12 +38,13 @@
           </div>
         </div>
   
-        <div class="field">
+        <!-- <div class="field">
           <label for="exampleFormControlFile1" class="label">PDF</label>
           <div class="control">
-            <input class="form-control" type="file" @change="uploadedFile" ref="file" >
+            <input class="form-control" type="file" @change="uploadedFile" ref="file">
           </div>
-        </div>
+        </div> -->
+
   
         <div class="field is-grouped">
           <div class="control">
@@ -72,7 +73,7 @@ export default {
       email: '',
       phone: '',
       website: '',
-      pdf: null,
+      pdf:'',
       isLoading: false
     }
   },
@@ -90,7 +91,7 @@ export default {
       client.append('email', this.email)
       client.append('phone', this.phone)
       client.append('website', this.website)
-      client.append('pdf', this.pdf )
+      // client.append('pdf', this.pdf )
 
 try {
   const response = await axios.post('/api/v1/clients/', client)

@@ -1,38 +1,45 @@
 <template>
-    <div class="container">
-        <div class="columns">
-            <div class="row is-4 is-offset-4">
-                <h1 class="title">Log in</h1>
-            
-                <form @submit.prevent="submitForm">
-                    <div class="field">
-                        <label>Email</label>
-                        <div class="control">
-                            <input type="email" name="email" class="input" v-model="username">
-                        </div>
-                    </div>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-4 is-offset-4">
+        <h1 class="title has-text-centered">Log in</h1>
 
-                    <div class="field">
-                        <label>Password</label>
-                        <div class="control">
-                            <input type="password" name="password" class="input" v-model="password">
-                        </div>
-                    </div>
-
-                    <div class="notification is-danger" v-if="errors.length">
-                        <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-                    </div>
-
-                    <div class="field">
-                        <div class="control">
-                            <button class="button is-success">Submit</button>
-                        </div>
-                    </div>
-                </form>
+        <form @submit.prevent="submitForm">
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left">
+              <input type="email" name="email" class="input" v-model="username" placeholder="Enter your email">
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
             </div>
-        </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left">
+              <input type="password" name="password" class="input" v-model="password" placeholder="Enter your password">
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="notification is-danger" v-if="errors.length">
+            <p v-for="error in errors" :key="error">{{ error }}</p>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <button class="button is-success is-fullwidth">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </template>
+
 
 <script>
     import axios from 'axios'

@@ -43,16 +43,16 @@
                     </div>
 
                     <div class="field">
-                        <label>Confidence</label>
+                        <label>Address</label>
                         <div class="control">
-                            <input type="number" class="input" v-model="lead.confidence">
+                            <input type="text" class="input" v-model="lead.address">
                         </div>
                     </div>
 
                     <div class="field">
-                        <label>Estimated value</label>
+                        <label> Designation </label>
                         <div class="control">
-                            <input type="number" class="input" v-model="lead.estimated_value">
+                            <input type="text" class="input" v-model="lead.designation">
                         </div>
                     </div>
 
@@ -71,7 +71,7 @@
                         </div>
                     </div>
 
-                    <div class="field">
+                    <!-- <div class="field">
                         <label>Priority</label>
                         <div class="control">
                             <div class="select">
@@ -82,7 +82,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="field">
                         <label>Assigned to</label>

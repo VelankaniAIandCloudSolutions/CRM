@@ -241,7 +241,7 @@
                   {% else %}
                     <form method="post" action="{% url 'accept_quotation' quote.id %}">
                       {% csrf_token %}
-                      <button class="hide-button" type="submit">Accept Quotation</button>
+                      <button class="hide-button" type="submit">Quotation Accepted</button>
                     </form>
                   {% endif %}
                   </div>
@@ -276,7 +276,7 @@
   
     const quoteID = this.$route.params.id;
   
-    this.quote.is_accepted = true;
+    this.quote.is_accepted = true;  
   
   
     try {
@@ -312,6 +312,14 @@
       }
     this.$store.commit('setIsLoading', false)
     }
+
+
+
+
+    
+
+
+
   </script>   {% endcomment %}
 
 

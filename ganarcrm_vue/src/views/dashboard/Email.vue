@@ -52,3 +52,151 @@
     }
   }
   </script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- <script>
+  import { reactive } from 'vue';
+  import axios from 'axios';
+
+  export default {
+    name: 'AddProposal',
+
+    data() {
+      return {
+        form: [
+          {
+            name: '',
+            company: '',
+            phone: '',
+            city: '',
+            date: '',
+            start_time: '',
+            end_time: '',
+            event: '',
+            setup: '',
+            venue: '',
+            attendance: '',
+            rate: '',
+            package: '',
+            buffet: 0,
+            addition: 0,
+            menu: 0,
+          },
+        ],
+        packages: [], // Populate with your package data
+        buffets: [], // Populate with your buffet data
+        additions: [], // Populate with your addition data
+        menus: [], // Store menus for each form row
+      };
+    },
+    methods: {
+      addRow() {
+        this.form.push({
+          name: '',
+          company: '',
+          phone: '',
+          city: '',
+          date: '',
+          start_time: '',
+          end_time: '',
+          event: '',
+          setup: '',
+          venue: '',
+          attendance: '',
+          rate: '',
+          package: 0,
+          buffet: 0,
+          addition: 0,
+          menu: 0,
+        });
+      },
+      removeRow(index) {
+        if (this.form.length > 1) {
+          this.form.splice(index, 1);
+        }
+      },
+      submitForm() {
+        this.$store.commit('setIsLoading', true);
+
+        const proposal = {
+          proposals: this.form.map((item) => ({
+            ...item,
+            menu: item.menu.map((menuItem) => ({ soup: menuItem.soup })),
+          })),
+        };
+
+        axios
+          .post('/api/v1/create_proposal/', proposal)
+          .then((response) => {
+            this.$router.push('/dashboard/proposals');
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            this.$store.commit('setIsLoading', false);
+          });
+      },
+
+       fetchMenus() {
+        const buffetId = document.getElementById('buffet').value;
+        const additionId = document.getElementById('addition').value;
+
+        axios
+          .get(`/api/v1/get_menu?buffet=${buffetId}&addition=${additionId}`)
+          .then((response) => {
+            this.menus = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+      
+      buffetField() {
+        const buffetId = document.getElementById('buffet').value;
+        window.location = "/?buffet=" + buffetId;
+      },
+      additionField() {
+        const additionId = document.getElementById('addition').value;
+        const buffet = this.getQueryParameter('buffet');
+        const url = "/?buffet=" + encodeURIComponent(buffet) + "&addition=" + additionId;
+        window.location = url;
+      },
+      getQueryParameter(parameterName) {
+        const queryString = window.location.search.substring(1);
+        const parameters = queryString.split('&');
+        for (let i = 0; i < parameters.length; i++) {
+          const parameter = parameters[i].split('=');
+          if (parameter[0] === parameterName) {
+            return decodeURIComponent(parameter[1]);
+          }
+        }
+        return null;
+      },
+    },
+    mounted() {
+      const buffetId = this.getQueryParameter('buffet');
+      const additionId = this.getQueryParameter('addition');
+
+      document.getElementById('buffet').value = buffetId;
+      document.getElementById('addition').value = additionId;
+
+      this.fetchMenus(); // Fetch the menu data on component mount
+    },
+  };
+</script> -->

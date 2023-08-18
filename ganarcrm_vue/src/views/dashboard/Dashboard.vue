@@ -80,10 +80,10 @@
           <div class="columns is-multiline">
           
               <div class="column is-6" v-for="lead in leads" :key="lead.id">
-                  <div class="card" style="background-color: #ffc371; margin-bottom: -4.5rem; height: 105%;">
+                  <div class="card" style="background-color:whitesmoke; margin-bottom: -4.5rem; height: 105%;">
                       <h3 class="is-size-4 mb-6" >{{ lead.company }}</h3>
                       <div class="buttons">
-                          <router-link :to="{ name: 'Lead', params: { id: lead.id } }" class="button is-light" style="top: -50%;">Details</router-link>
+                          <router-link :to="{ name: 'Lead', params: { lead_id: lead.id } }" class="button is-info is-rounded is-outlined" style="top: -50%;">Details</router-link>
                       </div>
                   </div>
               </div>
@@ -124,10 +124,13 @@
                           <td>{{ quote.quotation_date }}</td>
                           <td>{{ quote.expiry_date }}</td>
                           <td>
-                              <router-link :to="{ name: 'Quote', params: { id: quote.id } }" class="button btn is-info">Details</router-link>
+                              <router-link :to="{ name: 'Quote', params: { id: quote.id } }" class=" btn-sm is-info  is-outlined"><i class="fas fa-info-circle fa-2x"></i> Details</router-link>
                           </td>
                           <td>
-                              <button @click="deleteQuote(quote.id)" class="button is-danger">Delete</button>
+                              <button @click="deleteQuote(quote.id)" class="button is-danger  is-outlined">
+                                <!-- <i class="fas fa-trash fa-2x"> </i> -->
+                                Delete
+                              </button>
                           </td>
                           <td>
                           </td>
@@ -138,6 +141,7 @@
           </div>
       </div>
   </div>
+  
 </template>
 
 

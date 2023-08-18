@@ -16,6 +16,8 @@ urlpatterns = [
     path('api/v1/', include('team.urls')),
     path('api/v1/', include('client.urls')),
     path('api/v1/', include('quote.urls')),
+    path('api/v1/', include('praposal.urls')),
+    
     
     
     

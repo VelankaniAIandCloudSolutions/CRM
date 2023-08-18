@@ -1,4 +1,248 @@
+<template>
+  <div class="page-clients">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><router-link to="/dashboard">Dashboard</router-link></li>
+        <li class="is-active"><router-link to="/dashboard/clients" aria-label="true">Clients</router-link></li>
+      </ul>
+    </nav>
 
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <div class="title" style="text-transform: capitalize;">Clients</div>
+
+        <!-- <div>
+          <form @submit.prevent="getClients">
+            <div class="field has-addons">
+              <div class="control">
+                <input type="text" class="input" v-model="query">
+              </div>
+              <div class="control">
+                <button class="button is-success">Search</button>
+              </div>
+            </div>
+          </form>
+        </div> -->
+        <br>
+
+        <router-link to="/dashboard/clients/add" class="button btn is-primary is-rounded is-outlined" style="color: black; margin-left: 40%; height: 30%; width: 20%; text-transform: capitalize;">
+          <i class="fas fa-plus"></i> Add client
+        </router-link>
+      </div>
+
+      <hr>
+      <br>
+      <br>
+      <br>
+      <div class="filter-container">
+        <input type="text" v-model="filterText" placeholder="Filter by Name..." class="filter-input">
+      </div>
+
+      <ag-grid-vue
+        style="width: 100%; height: 500px; text-align: center;"
+        class="ag-theme-alpine"
+        :columnDefs="columnDefs"
+        :rowData="filteredClients"
+        :defaultColDef="defaultColDef"
+        @firstDataRendered="onFirstDataRendered"
+        :floatingFilter="true"
+        :pagination="true"
+        :paginationPageSize="paginationPageSize"
+      ></ag-grid-vue>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import { reactive, onMounted, ref } from 'vue';
+import { AgGridVue } from 'ag-grid-vue3';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+import '@fortawesome/fontawesome-free/css/all.css';
+import { mapActions } from 'vuex';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faL, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+export default {
+  name: 'Clients',
+  components: {
+    'ag-grid-vue': AgGridVue,
+    FontAwesomeIcon,
+  },
+  data() {
+    return {
+      paginationPageSize: null,
+      filterText: '',
+      clients: [],
+      query: '',
+      columnDefs: [
+        { headerName: 'Name', field: 'name',  filter: 'agTextColumnFilter' },
+        { headerName: 'Phone', field: 'phone',  filter: 'agTextColumnFilter' },
+        { headerName: 'Email', field: 'email',  filter: 'agTextColumnFilter' },
+        // { headerName: 'Assigned TO', field: 'assigned_to' },
+        
+        {
+          headerName: '',
+          field: 'id',
+          cellRenderer: (params) => {
+            const route = {
+              name: 'Client',
+              params: { client_id: params.value },
+            };
+
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-external-link-alt';
+            icon.style.cursor = 'pointer';
+            icon.addEventListener('click', (e) => {
+              e.stopPropagation(); // Prevent selection in ag-Grid
+              this.$router.push(route);
+            });
+
+            return icon;
+          },
+        }
+
+      ],
+      defaultColDef: {
+        sortable: true,
+        resizable: true
+      }
+     
+    };
+  },
+  computed: {
+    filteredClients() {
+      const filterText = this.filterText.toLowerCase();
+      return this.clients.filter((client) =>
+        client.name.toLowerCase().includes(filterText)
+        
+      );
+    }
+  },
+  created() {
+    this.paginationPageSize = 10;
+  },
+  mounted() {
+    this.getClients();
+  },
+  methods: {
+    async getClients() {
+      this.$store.commit('setIsLoading', true);
+      try {
+        const response = await axios.get(`/api/v1/clients/?search=${this.query}`);
+        this.clients = response.data.results;
+      } catch (error) {
+        console.log(error);
+      }
+      this.$store.commit('setIsLoading', false);
+    },
+    onFirstDataRendered(params) {
+      params.api.sizeColumnsToFit();
+    }
+  }
+};
+</script>
+
+
+<style>
+.filter-container {
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  width:500px;
+}
+
+.filter-input {
+  padding: 10px;
+  width: 800px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filter-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 <template>
   <div class="page-clients" >
     <nav class="breadcrumb" aria-label="breadcrumbs">
@@ -10,7 +254,7 @@
 
     <div class="columns is-multiline">
       <div class="column is-12">
-        <div class="title">Clients</div>
+        <div class="title" style="text-transform: capitalize;">Clients</div>
 
           <div>
   
@@ -28,26 +272,23 @@
           </div>
           <br>
 
-          <router-link to="/dashboard/clients/add"  class="button btn is-primary" style="color: black;" >Add client</router-link>
+          <router-link to="/dashboard/clients/add"  class="button btn is-primary is-rounded is-outlined" style="color: black; margin-left:40%; height:30%; width:20%;text-transform: capitalize;" > <i class="fas fa-plus"></i> Add client</router-link>
              
 
                   
-                  <!-- v-if="$store.state.team.max_clients > num_clients" 
-        <div class="notification is-danger" v-else>
-          You have reached the top of your limitations. Please upgrade!
-        </div> -->
+                 
       </div>
 
       <hr>
-      
+      <br>      
   
       
 
       <div class="column is-3" v-for="client in clients" v-bind:key="client.id">
-        <div class="card" style="background-color:  #ffc371;">
-          <h3 class="is-size-4 mb-4">{{ client.name }}</h3>
+        <div class="card" style="background-color:whitesmoke;">
+          <h3 class="is-size-4 mb-4" style="color:black;">{{ client.name }}</h3>
 
-          <router-link :to="{ name: 'Client', params: { id:client.id } }" class="button is-light">Details</router-link>
+          <router-link :to="{ name: 'Client', params: { client_id: client.id } }" class="button is-info is-rounded is-outlined" >Details</router-link>
         </div>
       </div>
     </div>
@@ -116,7 +357,16 @@
           }
       }
   }
-</script>
+</script> -->
+
+
+
+
+
+
+
+
+
 
 
 <style >
@@ -273,6 +523,11 @@ body {
 
 </style>
 
+
+ <!-- v-if="$store.state.team.max_clients > num_clients" 
+        <div class="notification is-danger" v-else>
+          You have reached the top of your limitations. Please upgrade!
+        </div> -->
 
 
 

@@ -4,7 +4,7 @@
 
 <template>
   <div class="container">
-    <h1 class="title">Quotation Details</h1> 
+    <h1 class="title" style="text-transform: capitalize;">Quotation Details</h1> 
 
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
@@ -15,13 +15,37 @@
 
     <hr>
 
-    <div class="buttons">
-      <button @click="getpdf()" class="button is-dark">Download PDF</button>
+    <div class="buttons" >
+      <button @click="getpdf()" class="button is-dark is-outlined" style="width:18%; text-transform: capitalize;">
+        <span class="icon is-small">
+          <i class="fas fa-file-pdf" style="margin-right: 35px;"></i>
+        </span>
+        Download PDF
+      </button>
+
       
-      <button v-if="!quote.is_accepted" @click="setAsAccepted()" class="button is-success">Set as Accepted</button>
-      <button v-if="!quote.is_rejected" @click="setAsRejected()" class="button is-danger">Set as Rejected</button>
+      <button v-if="!quote.is_accepted" @click="setAsAccepted()" class="button is-success is-outlined" style="width:17%;text-transform: capitalize;">
+        <span class="icon is-small">
+          <i class="fas fa-check" style="margin-right: 25px;"></i>
+        </span>
+        Set as Accepted
+      </button>
+
+      <button v-if="!quote.is_rejected" @click="setAsRejected()" class="button is-danger is-outlined" style="width:17%;text-transform: capitalize;">
+        <span class="icon is-small">
+          <i class="fas fa-times" style="margin-right: 25px;"></i>
+        </span>
+        Set as Rejected
+      </button>
+
       
-      <button @click="sendReminder()" class="button is-info " >Send E-mail</button>
+      <button @click="sendReminder()" class="button is-info is-outlined" style="width:17%;text-transform: capitalize;">
+        <span class="icon is-small">
+          <i class="fas fa-envelope" style="margin-right: 38px;"></i>
+        </span>
+        Send E-mail
+      </button>
+
     </div>
 
     <table class="table is-fullwidth is-striped">
@@ -36,7 +60,7 @@
           <th>To Date</th>
           <th>Inclusions</th>
           <th>Menu Items</th>
-          <th>Action</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -59,7 +83,7 @@
             </ul>
           </td>
           <td>
-            <button @click="deleteProduct(product.id)" class="button is-danger">Delete</button>
+            <button @click="deleteProduct(product.id)" class="button btn is-rounded is-outlined is-danger" style="text-transform: capitalize;"> <i class="fas fa-trash"> </i>Delete</button>
           </td>
         </tr>
       </tbody>
@@ -103,7 +127,7 @@ import axios from 'axios'
 import { toast } from 'bulma-toast'
 import 'vue-toastification/dist/index.css';
 
-  const fileDownload = require('js-file-download')
+const fileDownload = require('js-file-download')
 
 
   export default {
@@ -199,35 +223,33 @@ import 'vue-toastification/dist/index.css';
       },
 
       async sendReminder() {
-          try {
-              const quoteID = this.$route.params.id;
-              const response = await axios
-              .post(`/api/v1/quotes/${quoteID}/send_reminder/`)
-              .then(response => {
-                toast({
-                          message: 'The Quotaion  was send successfully',
-                          type: 'is-success',
-                          dismissible: true,
-                          pauseOnHover: true,
-                          duration: 2000,
-                          position: 'bottom-right',
-                      })
-              })
-             
-              console.log("sendReminder response:", response); // log the response for debugging purposes
-              if (response.status === 200) {
-              this.showSuccess = true;
-              this.showError = false;
-              } else {
-              this.showSuccess = false;
-              this.showError = true;
-              }
-          } catch (error) {
-              console.error("sendReminder error:", error); // log the error for debugging purposes
-              this.showSuccess = false;
-              this.showError = true;
-          }
-      },
+  try {
+    const quoteID = this.$route.params.id;
+    const response = await axios.post(`/api/v1/quotes/${quoteID}/send_reminder/`);
+
+    console.log("sendReminder response:", response); // log the response for debugging purposes
+
+    if (response.data.success) {
+      toast({
+            message: 'Quotation sent successfully',
+            type: 'is-success',
+            position: 'bottom-right',
+            duration: 2000,
+            dismissible: true,
+          });
+      this.showSuccess = true;
+      this.showError = false;
+    } else {
+      this.showSuccess = false;
+      this.showError = true;
+    }
+  } catch (error) {
+    console.error("sendReminder error:", error); // log the error for debugging purposes
+    this.showSuccess = false;
+    this.showError = true;
+  }
+},
+
 
       async setAsAccepted() {
         this.$store.commit('setIsLoading', true);

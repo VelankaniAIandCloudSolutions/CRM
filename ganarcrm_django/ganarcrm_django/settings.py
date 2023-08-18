@@ -43,10 +43,19 @@ CORS_ALLOWED_ORIGINS = [
     'http://crm-vue-app-708.s3-website.ap-south-1.amazonaws.com',
     'http://crm-vue-app-708.s3-website.ap-south-1.amazonaws.com',
     
+    
+    'http://localhost:8080',
+    'http://localhost:8081'
+
+    
 ]
 CORS_ORIGIN_WHITELIST = [
     'http://crm-vue-app-708.s3-website.ap-south-1.amazonaws.com',
     'http://crm-vue-app-708.s3-website.ap-south-1.amazonaws.com',
+    
+    
+    'http://localhost:8080',
+    'http://localhost:8081'
 ]
 
 REST_FRAMEWORK = {
@@ -61,7 +70,7 @@ REST_FRAMEWORK = {
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -73,10 +82,18 @@ INSTALLED_APPS = [
     
     'djoser',
     
+    
+    
     'client.apps.ClientConfig',
     'lead.apps.LeadConfig',
     'team.apps.TeamConfig',
     'quote.apps.QuoteConfig',
+    'praposal.apps.PraposalConfig',
+    
+    'django.contrib.admin',
+    
+    
+
     
     
 ]
@@ -175,7 +192,7 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "mdadil.cse.rymec@gmail.com"
-EMAIL_HOST_PASSWORD = 'yqitjfeerbqecmpk'
+EMAIL_HOST_PASSWORD = 'xdtojouxixqcuqog'
 
 
 

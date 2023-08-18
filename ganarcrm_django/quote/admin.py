@@ -20,3 +20,20 @@ admin.site.register(Product)
 admin.site.register(Inclusion)
 
 admin.site.register(Menu_Item)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

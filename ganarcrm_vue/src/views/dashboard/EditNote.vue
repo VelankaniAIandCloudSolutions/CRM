@@ -87,6 +87,8 @@
                     .get(`/api/v1/notess/${notesID}?lead_id=${leadID}`)
                     .then(response => {
                         this.notes = response.data
+
+                        
                         
                     })
                     .catch(error => {

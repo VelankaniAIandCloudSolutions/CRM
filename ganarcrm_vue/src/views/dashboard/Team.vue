@@ -18,7 +18,9 @@
                 <hr> -->
 
                 <template v-if="team.created_by.id === parseInt($store.state.user.id)">
-                    <router-link :to="{'name': 'AddMember'}" class="button is-primary" style="color: black;">Add member</router-link>
+                    <router-link :to="{'name': 'AddMember'}" class="button is-primary is-rounded is-outlined" style="color:black; margin-left:39%;" >
+                        <i class="fas fa-plus"></i>
+                        Add member</router-link>
                 </template>
             </div>
 

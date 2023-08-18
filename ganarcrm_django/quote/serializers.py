@@ -110,3 +110,12 @@ class ProductSerializer(serializers.ModelSerializer):
             
         )
 
+
+
+
+
+
+
+
+
+

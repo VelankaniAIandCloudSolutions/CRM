@@ -31,10 +31,10 @@
                         <td>{{ quote.quotation_date }}</td>
                         <td>{{ quote.expiry_date }}</td>
                         <td>
-                        <router-link :to="{ name: 'Quote', params: { id: quote.id } }" class="button btn is-info">Details</router-link>
+                        <router-link :to="{ name: 'Quote', params: { id: quote.id } }" class="button btn is-info is-rounded is-outlined"><i class="fas fa-info-circle"></i> Details</router-link>
                         </td>
                         <td>
-                        <button @click="deleteQuote(quote.id)" class="button is-danger">Delete</button>
+                        <button @click="deleteQuote(quote.id)" class="button is-danger is-rounded is-outlined"><i class="fas fa-trash"> </i> Delete</button>
                         </td>
                         
                     </tr>

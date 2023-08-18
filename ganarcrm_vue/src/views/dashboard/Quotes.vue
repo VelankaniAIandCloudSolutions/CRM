@@ -10,9 +10,9 @@
 
     <div class="columns is-multiline">
       <div class="column is-12">
-        <h1 class="title">Quotes</h1>
+        <h1 class="title"  style="text-transform: capitalize;">Quotations</h1>
 
-        <router-link to="/dashboard/quotes/add" class="button btn is-primary">Add Quote</router-link>
+        <router-link to="/dashboard/quotes/add" class="button btn is-primary is-rounded is-outlined"  style="text-transform: capitalize;color: black; margin-left:40%; height:45%; width:20%;" >  <i class="fas fa-plus"></i>Add Quote</router-link>
       </div>
 
       <div class="column is-12">
@@ -45,10 +45,16 @@
                 <td>{{ quote.quotation_date }}</td>
                 <td>{{ quote.expiry_date }}</td>
                 <td>
-                  <router-link :to="{ name: 'Quote', params: { id: quote.id } }" class="button btn is-info">Details</router-link>
+                  <router-link :to="{ name: 'Quote', params: { id: quote.id } }" class="button is-info  is-outlined"  style="text-transform: capitalize;">
+                    <!-- <i class="fas fa-info-circle fa-2x"></i> -->
+                    Details
+                  </router-link>
                 </td>
                 <td>
-                  <button @click="deleteQuote(quote.id)" class="button is-danger">Delete</button>
+                  <button @click="deleteQuote(quote.id)" class="button btn  is-danger is-outlined" style="text-transform: capitalize;">
+                    <!-- <i class="fas fa-trash"> </i> -->
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>

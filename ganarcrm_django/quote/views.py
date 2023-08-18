@@ -213,7 +213,7 @@ def generate_pdf(request, quote_id):
     return response
 
 
-# 
+
 
 
 
@@ -294,6 +294,29 @@ def rejected_quotes(request):
     rejected_quotes = Quote.objects.filter(quotation_status = 'rejected')
     serializer = QuoteSerializer(rejected_quotes , many=True)
     return Response(serializer.data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

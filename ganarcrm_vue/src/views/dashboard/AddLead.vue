@@ -1,99 +1,51 @@
 <template>
-    <div class="container" >
-        <div class="columns is-multiline">
-            <div class="column is-12">
-                <h1 class="title">Add lead</h1>
-            </div>
-
-            <div class="column is-12">
-                <form @submit.prevent="submitForm" >
-                    <div class="field">
-                        <label>Company</label>
-                        <div class="control">
-                            <input type="text" class="input" v-model="company">
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label>Contact person</label>
-                        <div class="control">
-                            <input type="text" class="input" v-model="contact_person">
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label>Email</label>
-                        <div class="control">
-                            <input type="email" class="input" v-model="email">
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label>Phone</label>
-                        <div class="control">
-                            <input type="text" class="input" v-model="phone">
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label>Website</label>
-                        <div class="control">
-                            <input type="text" class="input" v-model="website">
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label>Confidence</label>
-                        <div class="control">
-                            <input type="number" class="input" v-model="confidence">
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label>Estimated value</label>
-                        <div class="control">
-                            <input type="number" class="input" v-model="estimated_value">
-                        </div>
-                    </div>
-
-                    <div class="field" >
-                        <label>Status</label>
-                        <div class="control">
-                            <div class="select">
-                                <select v-model="status">
-                                    <option value="new">New</option>
-                                    <option value="contacted">Contacted</option>
-                                    <option value="inprogress">In progress</option>
-                                    <option value="lost">Lost</option>
-                                    <option value="won">Won</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label>Priority</label>
-                        <div class="control">
-                            <div class="select">
-                                <select v-model="priority">
-                                    <option value="low">Low</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="high">High</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <div class="control">
-                            <button class="button is-success">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+    <div class="container">
+      <h1 class="title">Add Lead</h1>
+      <form @submit.prevent="submitForm" class="lead-form">
+        <div class="form-field">
+          <label for="company">Company</label>
+          <input type="text" id="company" class="input" v-model="company" required>
         </div>
+        <div class="form-field">
+          <label for="contact_person">Contact Person</label>
+          <input type="text" id="contact_person" class="input" v-model="contact_person" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="input" v-model="email" required>
+        </div>
+        <div class="form-field">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" class="input" v-model="phone" required>
+        </div>
+        <div class="form-field">
+          <label for="address">Company Address</label>
+          <input type="text" id="address" class="input" v-model="address" required>
+        </div>
+        <div class="form-field">
+          <label for="designation">Designation</label>
+          <input type="text" id="designation" class="input" v-model="designation" required>
+        </div>
+        <div class="form-field">
+          <label for="website">Website</label>
+          <input type="text" id="website" class="input" v-model="website" required>
+        </div>
+        <div class="form-field">
+          <label for="status">Status</label>
+          <select id="status" class="select" v-model="status" required>
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="inprogress">In Progress</option>
+            <option value="lost">Lost</option>
+            <option value="won">Won</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <button type="submit" class="button is-success">Submit</button>
+        </div>
+      </form>
     </div>
-</template>
+  </template>
 
 <script>
     import axios from 'axios'
@@ -105,14 +57,15 @@
         data() {
             return {
                 company: '',
+                address: '',
+                designation:'',
                 contact_person: '',
                 email: '',
                 phone: '',
-                estimated_value: 0,
-                confidence: 0,
+               
                 website: '',
                 status: 'new',
-                priority: 'medium'
+               
             }
         },
         methods: {
@@ -121,14 +74,15 @@
 
                 const lead = {
                     company: this.company,
+                    address: this.address,
+                    designation: this.designation,
                     contact_person: this.contact_person,
                     email: this.email,
                     phone: this.phone,
                     website: this.website,
-                    estimated_value: this.estimated_value,
-                    confidence: this.confidence,
+                   
                     status: this.status,
-                    priority: this.priority
+                    
                 }
 
                 await axios
@@ -154,3 +108,74 @@
         }
     }
 </script>
+
+
+
+<style>
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.lead-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.select {
+  appearance: none;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #218838;
+}
+
+.button.is-success {
+  background-color: #28a745;
+}
+
+.button.is-success:hover {
+  background-color: #218838;
+}
+
+
+
+</style>
+
+
+

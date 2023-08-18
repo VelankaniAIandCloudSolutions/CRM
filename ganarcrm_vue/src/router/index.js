@@ -32,9 +32,18 @@ import Email from '../views/dashboard/Email.vue'
 import AcceptedQuotes from '../views/dashboard/AcceptedQuotes.vue'
 import QuoteThankYou from '../views/dashboard/QuoteThankYou.vue'
 import RejectedQuotes from '../views/dashboard/RejectedQuotes.vue'
+import Proposals from '../views/dashboard/Proposals.vue'
+import AddProposal from '../views/dashboard/AddProposal.vue'
+import Praposal from '../views/dashboard/Praposal.vue'
+import Proposal from '../views/dashboard/Proposal.vue'
 
+import AddItem from '../views/dashboard/AddItem.vue'
 
-
+import EditService from '../views/dashboard/EditService.vue'
+import EditAccomadation from '../views/dashboard/EditAccomadation.vue'
+import EditFormaInvoice from '../views/dashboard/EditFormaInvoice.vue'
+import EditDeposite from '../views/dashboard/EditDeposite.vue'
+import EditPraposal from '../views/dashboard/EditPraposal.vue'
 
 const routes = [
   {
@@ -151,7 +160,7 @@ const routes = [
     }
   },
   {
-    path: '/dashboard/leads/:id',
+    path: '/dashboard/leads/:lead_id',
     name: 'Lead',
     component: Lead,
     meta: {
@@ -167,6 +176,87 @@ const routes = [
       requireLogin: true
     }
   },
+  {
+    path: '/dashboard/item/add',
+    name: 'AddItem',
+    component: AddItem,
+    meta: {
+      requireLogin: true
+      }
+  },
+  {
+    path: '/dashboard/praposals/:praposal_id/:id/edit',
+    name:'EditService',
+    component: EditService,
+    meta : {
+      requireLogin:true
+    }
+  },
+  {
+    path: '/dashboard/proposals/:service_id/:id/edit',
+    name:'EditAccomadation',
+    component:EditAccomadation,
+    meta: {
+      requireLogin:true
+    }
+  },
+  {
+    path: '/dashboard/proposals/:service_id/:id/edit-invoice',
+    name: 'EditFormaInvoice',
+    component: EditFormaInvoice,
+    meta : {
+      requireLogin:true
+    }
+  },
+  {
+    path: '/dashboard/proposals/:praposal_id/edit-deposite',
+    name: 'EditDeposite',
+    component: EditDeposite,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/proposals/:praposal_id/:id/edit-proposal',
+    name: 'EditPraposal',
+    component: EditPraposal,
+    meta : {
+      requireLogin:true
+    }
+  },
+  
+  {
+    path: '/dashboard/proposals',
+    name: 'Proposals',
+    component: Proposals,
+    meta: {
+      requireLogin: true
+
+    }
+  },
+  {
+    path: '/dashboard/proposals/add',
+    name: ' AddProposal',
+    component: AddProposal,
+   
+  },
+  {
+    path: '/dashboard/praposals/:id',
+    name: 'Praposal',
+    component: Praposal,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/proposals/:id',
+    name: 'Proposal',
+    component: Proposal,
+    meta: {
+      requireLogin: true
+    }
+  },
+ 
   {
     path: '/dashboard/quotes',
     name: 'Quotes',
@@ -234,7 +324,7 @@ const routes = [
     }
   },
   {
-    path: '/dashboard/clients/:id',
+    path: '/dashboard/clients/:client_id',
     name: 'Client',
     component: Client,
     meta: {

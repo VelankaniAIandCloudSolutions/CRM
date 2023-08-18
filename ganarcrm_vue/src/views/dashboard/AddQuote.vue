@@ -14,7 +14,7 @@
                     <div class="input-box">
                         <label>Client Name</label>
                         <div class="field">
-                            <div class="select" style="width: 100%;">
+                            <!-- <div class="select" style="width: 100%;"> -->
                            
                                 <select size="clients.length" v-model="client_name"  >
                                     <option 
@@ -25,7 +25,7 @@
                                         {{ client.name }}
                                     </option>
                                 </select>
-                            </div>
+                            <!-- </div> -->
                             
                         </div>
                     </div>
@@ -89,10 +89,10 @@
                                             </div>
                                             
 
-                                           <div class="input-box">
+                                           <!-- <div class="input-box">
                                                 <span class="details">Unit</span>
                                                 <input type="text" class="form-control" v-model="item.unit" >
-                                            </div>
+                                            </div> -->
 
                                            
                                             
@@ -230,6 +230,8 @@
                         </div>
                     </div>
                     </div>
+                    <br>
+                    <br>
                
                     
                     <div class="field">
@@ -275,12 +277,12 @@
 
         setup() {
             const form = reactive([
-                {service_name : '', unit: '', rate: '', quantity: '', amount: '' , from_date: '', to_date: '', inclusions: '', menu_items: ''}
+                {service_name : '',  rate: '', quantity: '', amount: '' , from_date: '', to_date: '', inclusions: '', menu_items: ''}
             ])
 
             const addRow = (index) => {
              
-                form.push({  service_name : '', unit: '', rate: '', quantity: '', amount: '' , from_date: '', to_date: '', inclusions: '', menu_items: ''})
+                form.push({  service_name : '', rate: '', quantity: '', amount: '' , from_date: '', to_date: '', inclusions: '', menu_items: ''})
             }
 
             const removeRow = (index) => {
@@ -324,7 +326,7 @@
                 description:'',
                 terms_and_condition:'',
                 service_name:'',
-                unit:'',
+                // unit:'',
                 rate:'',
                 quantity:'',
                 amount:'',
@@ -475,66 +477,84 @@
 
 
 
-
 <style>
-/* 
-    *{
-        margin:0 ;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'poppins', sans-serif;
-    } */
+/* General styles */
 
-    body{
-        height:fit-content;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        /* background: linear-gradient(135deg, #71b7e6, #9b59b6 ); */
-    }
-    .conatiner{
-        max-width: 700px;
-        width: 100%;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-    }
-    .conatiner .title::before{
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 3px;
-        width: 30px;
-        border-radius: 5px;
-        background: linear-gradient(135deg, #71b7e6, #9b59b6);
-    }
-    .content form .user-details{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin: 20px 0 12px 0;
-    }
+body {
+  /* background-image: linear-gradient(to bottom right, #ff5f5f, #ffc371); */
+  height: 100%;
+  width:300%;
+  background-color:white;
+}
 
+.options {
+  width: 15px;
+  height: auto;
+}
 
-    .content form .user-details{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin: 20px 0 12px 0;
-    }
+.box {
+  text-align: center;
+  width: 90%;
+  margin: auto;
+}
 
-   
+.content {
+  text-align: center;
+}
 
+.table {
+  width: 90%;
+  margin: auto;
+}
 
+.strike {
+  text-decoration: line-through;
+}
 
-    form .user-details .input-box{
-        margin-bottom: 15px;
-        width: calc(100% / 2 - 20px);
-    }
-    .user-details .input-box input{
+div.scrollmenu {
+  /* background-color: #333; */
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+
+/* Container and form styles */
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.container .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+.content form .user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+
+form .user-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+
+.user-details .input-box input {
   height: 45px;
   width: 100%;
   outline: none;
@@ -545,6 +565,7 @@
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
+
 select {
   height: 45px;
   width: 100%;
@@ -556,26 +577,31 @@ select {
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
+
 .user-details .input-box input:focus,
-.user-details .input-box input:valid{
+.user-details .input-box input:valid {
   border-color: #9b59b6;
 }
- form .gender-details .gender-title{
+
+form .gender-details .gender-title {
   font-size: 20px;
   font-weight: 500;
- }
- form .category{
-   display: flex;
-   width: 80%;
-   margin: 14px 0 ;
-   justify-content: space-between;
- }
- form .category label{
-   /* display: flex; */
-   align-items: center;
-   cursor: pointer;
- }
- form .category label .dot{
+}
+
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+
+form .category label {
+  /* display: flex; */
+  align-items: center;
+  cursor: pointer;
+}
+
+form .category label .dot {
   height: 18px;
   width: 18px;
   border-radius: 50%;
@@ -584,125 +610,19 @@ select {
   border: 5px solid transparent;
   transition: all 0.3s ease;
 }
- #dot-1:checked ~ .category label .one,
- #dot-2:checked ~ .category label .two,
- #dot-3:checked ~ .category label .three{
-   background: #9b59b6;
-   border-color: #d9d9d9;
- }
- form input[type="radio"]{
-   display: none;
- }
- /* form .button{
-   height: 45px;
-   margin: 35px 0
- } */
- /* form .button input{
-   height: 100%;
-   width: 100%;
-   border-radius: 5px;
-   border: none;
-   color: #f40707;
-   font-size: 18px;
-   font-weight: 500;
-   letter-spacing: 1px;
-   cursor: pointer;
-   transition: all 0.3s ease;
-   background: linear-gradient(135deg, #71b7e6, #9b59b6);
- } */
- form .button input:hover{
-  transform: scale(0.99);
-  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
-  }
- @media(max-width: 584px){
- .container{
-  max-width: 100%;
-}
-form .user-details .input-box{
-    margin-bottom: 15px;
-    width: 100%;
-  }
-  form .category{
-    width: 100%;
-  }
-  .content form .user-details{
-    max-height: 300px;
-    overflow-y: scroll;
-  }
-  .user-details::-webkit-scrollbar{
-    width: 5px;
-  }
-  }
-  @media(max-width: 459px){
-  .container .content .category{
-    flex-direction: column;
-    }
+
+#dot-1:checked ~ .category label .one,
+#dot-2:checked ~ .category label .two,
+#dot-3:checked ~ .category label .three {
+  background: #9b59b6;
+  border-color: #d9d9d9;
 }
 
-
-
-
-
-html, body{
-    /* background-image: linear-gradient(to bottom right, #ff5f5f, #ffc371); */
-    height: 100%;
+form input[type="radio"] {
+  display: none;
 }
 
-.options {
-    width: 15px;
-    height: auto;
-}
-
-.box {
-    text-align: center;
-    width: 90%;
-    margin: auto;
-}
-
-.content {
-    text-align: center;
-}
-
-.table {
-    width: 90%;
-    margin: auto;
-}
-
-.strike {
-    text-decoration: line-through;
-}
-
-
-
-div.scrollmenu {
-  /* background-color: #333; */
-  overflow: auto;
-  white-space: nowrap;
-    }
-
-
-
-div.scrollmenu a:hover {
-  background-color: #777;
-}
-
-/* div.scrollmenu th {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px;
-  text-decoration: none;
-} */
-
-/* div.scrollmenu td {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px;
-  text-decoration: none;
-} */
-
-
+/* Additional styles can be added here as needed */
 
 </style>
 

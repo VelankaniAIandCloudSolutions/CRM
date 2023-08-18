@@ -14,7 +14,7 @@ from .serializers import LeadSerializer , NotesSerializer
 
 
 class LeadPagination(PageNumberPagination):
-    page_size = 50
+    page_size = 8
 
 class LeadViewSet(viewsets.ModelViewSet):
     serializer_class = LeadSerializer
@@ -74,8 +74,9 @@ class NotesViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         team = Team.objects.filter(members=self.request.user).first()
-        lead_id = self.request.data['lead_id']
+        lead_id = self.request.data.get('lead_id')
         serializer.save(team=team, created_by=self.request.user, lead_id=lead_id)
+
 
 
 

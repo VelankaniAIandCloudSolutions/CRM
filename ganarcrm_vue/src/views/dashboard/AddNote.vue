@@ -104,7 +104,7 @@
                             position:'bottom-right'
                         })
 
-                        this.$router.push({ name: 'Lead', params: { id: this.$route.params.id } })
+                        this.$router.push({ name: 'Lead', params: { lead_id: this.$route.params.id } })
 
                     })
                     .catch(error => {
@@ -349,6 +349,10 @@ div.scrollmenu a:hover {
   padding: 14px;
   text-decoration: none;
 } */
+
+
+
+
 
 
 
